@@ -1,10 +1,15 @@
-import { Box } from './Box/Box';
+// import { Box } from './Box/Box';
 import { Home } from './Home/Home';
+import { HomeView } from './HomeView/HomeView';
+import { Nav } from './Nav/Nav';
 
 export const App = () => {
   return (
-    <Box display="flex" border="1px solid red">
-      <Home />
-    </Box>
+    // <Box display="flex">
+    <Home>
+      <Nav />
+      <HomeView />
+    </Home>
+    // </Box>
   );
 };
