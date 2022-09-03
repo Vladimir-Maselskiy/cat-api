@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/cat-api/static/css/main.7acaea2f.css",
+    "main.js": "/cat-api/static/js/main.8a8b624e.js",
+    "index.html": "/cat-api/index.html",
+    "main.7acaea2f.css.map": "/cat-api/static/css/main.7acaea2f.css.map",
+    "main.8a8b624e.js.map": "/cat-api/static/js/main.8a8b624e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.8a8b624e.js"
+  ]
+}
