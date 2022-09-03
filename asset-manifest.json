@@ -1,13 +1,14 @@
 {
   "files": {
     "main.css": "/cat-api/static/css/main.7acaea2f.css",
-    "main.js": "/cat-api/static/js/main.8a8b624e.js",
+    "main.js": "/cat-api/static/js/main.64a75093.js",
+    "static/media/girl-and-pet.png": "/cat-api/static/media/girl-and-pet.1927e13f60069098098c.png",
     "index.html": "/cat-api/index.html",
     "main.7acaea2f.css.map": "/cat-api/static/css/main.7acaea2f.css.map",
-    "main.8a8b624e.js.map": "/cat-api/static/js/main.8a8b624e.js.map"
+    "main.64a75093.js.map": "/cat-api/static/js/main.64a75093.js.map"
   },
   "entrypoints": [
     "static/css/main.7acaea2f.css",
-    "static/js/main.8a8b624e.js"
+    "static/js/main.64a75093.js"
   ]
 }
