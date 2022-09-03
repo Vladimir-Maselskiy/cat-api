@@ -4,5 +4,5 @@ export const StyledHome = styled.div`
   display: flex;
   width: 1440px;
   height: 900px;
-  border: 1px solid red;
+  background-color: #f8f8f7;
 `;

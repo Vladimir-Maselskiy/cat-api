@@ -3,9 +3,9 @@ import img from '../../img/girl-and-pet.png';
 
 export const StyledHomeView = styled.div`
   position: relative;
-  width: 775px;
+  flex-shrink: 1;
+  min-width: 775px;
   padding: 30px 30px 30px 65px;
-  z-index: 2;
   background-size: contain;
   background-repeat: no-repeat;
   ::before {
