@@ -4,6 +4,7 @@ import {
   ListItem,
   ItemTitle,
   ItemIMG,
+  StyledNavLink,
 } from './StyledNav.styled';
 
 import voting from '../../img/vote-table.png';
@@ -15,16 +16,22 @@ export const Nav = () => {
     <StyledNav>
       <StyledList>
         <ListItem>
-          <ItemIMG color="#B4B7FF" img={voting}></ItemIMG>
-          <ItemTitle>VOTING</ItemTitle>
+          <StyledNavLink to="./voting">
+            <ItemIMG color="#B4B7FF" img={voting}></ItemIMG>
+            <ItemTitle>VOTING</ItemTitle>
+          </StyledNavLink>
         </ListItem>
         <ListItem>
-          <ItemIMG color="#97EAB9" img={breeds}></ItemIMG>
-          <ItemTitle>BREEDS</ItemTitle>
+          <StyledNavLink to="./breeds">
+            <ItemIMG color="#97EAB9" img={breeds}></ItemIMG>
+            <ItemTitle>BREEDS</ItemTitle>
+          </StyledNavLink>
         </ListItem>
         <ListItem>
-          <ItemIMG color="#FFD280" img={gallery}></ItemIMG>
-          <ItemTitle>GALLERY</ItemTitle>
+          <StyledNavLink to="./gallery">
+            <ItemIMG color="#FFD280" img={gallery}></ItemIMG>
+            <ItemTitle>GALLERY</ItemTitle>
+          </StyledNavLink>
         </ListItem>
       </StyledList>
     </StyledNav>

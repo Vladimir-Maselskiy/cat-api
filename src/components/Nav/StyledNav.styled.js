@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledNav = styled.div`
@@ -18,6 +19,9 @@ export const ListItem = styled.li`
   height: 244px;
   :not(:first-child) {
     margin-left: 16px;
+  }
+  :hover {
+    cursor: pointer;
   }
 `;
 
@@ -49,4 +53,15 @@ export const ItemTitle = styled.div`
   font-size: 12px;
   line-height: 1.33;
   letter-spacing: 2px;
+`;
+
+export const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  :hover div:last-child {
+    background-color: #fbe0dc;
+  }
+  &.active div:last-child {
+    background-color: #ff868e;
+    color: #ffffff;
+  }
 `;
