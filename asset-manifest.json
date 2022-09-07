@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/cat-api/static/css/main.1ec7bdca.css",
-    "main.js": "/cat-api/static/js/main.92d4d367.js",
+    "main.js": "/cat-api/static/js/main.3ea07027.js",
     "static/media/girl-and-pet.png": "/cat-api/static/media/girl-and-pet.1927e13f60069098098c.png",
     "static/media/images-search.png": "/cat-api/static/media/images-search.69ba4bdb455e5c8cd127.png",
     "static/media/vote-table.png": "/cat-api/static/media/vote-table.8278dcd9946078ae631e.png",
     "static/media/pet-breeds.png": "/cat-api/static/media/pet-breeds.f93666435f7dee0dbc91.png",
     "index.html": "/cat-api/index.html",
     "main.1ec7bdca.css.map": "/cat-api/static/css/main.1ec7bdca.css.map",
-    "main.92d4d367.js.map": "/cat-api/static/js/main.92d4d367.js.map"
+    "main.3ea07027.js.map": "/cat-api/static/js/main.3ea07027.js.map"
   },
   "entrypoints": [
     "static/css/main.1ec7bdca.css",
-    "static/js/main.92d4d367.js"
+    "static/js/main.3ea07027.js"
   ]
 }
