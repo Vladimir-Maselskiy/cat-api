@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledBreedsGallery = styled.ul`
   display: grid;
   width: 640px;
-  max-height: 782px;
+  max-height: 716px;
   grid-template-areas:
     'img0 img1 img2'
     'img0 img3 img3'
