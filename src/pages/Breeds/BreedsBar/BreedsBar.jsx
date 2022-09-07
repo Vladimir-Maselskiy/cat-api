@@ -10,7 +10,7 @@ export const BreedsBar = () => {
     <Box display="flex">
       <BackBotton />
       <PageTitle title="BREEDS" />
-      <BreedsSelect breeds={breeds} />
+      <BreedsSelect breeds={breeds} setBreeds={setBreeds} />
     </Box>
   );
 };
