@@ -9,7 +9,6 @@ import { BreedsBar } from './BreedsBar/BreedsBar';
 
 export const Breeds = () => {
   const [breeds, setBreeds] = useState(null);
-  //   console.log(catAPI);
   useEffect(() => {
     catAPI.getBreeds().then(resp => setBreeds(resp));
   }, []);
@@ -22,7 +21,7 @@ export const Breeds = () => {
       </Box>
       <Box bg="#FFFFFF" mt={20} borderRadius={20} p={20}>
         <Box>
-          <BreedsBar></BreedsBar>
+          <BreedsBar setBreeds={setBreeds}></BreedsBar>
         </Box>
 
         <Box mt={20}>{breeds && <BreedsGallery breeds={breeds} />}</Box>

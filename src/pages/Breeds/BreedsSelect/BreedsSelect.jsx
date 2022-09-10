@@ -1,48 +1,76 @@
-import Select from '@mui/material/Select';
-import FormControl from '@mui/material/FormControl';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Select from 'react-select';
+import catAPI from 'utils/catAPI';
 
-export const BreedsSelect = ({ breeds }) => {
-  const [value, setValue] = useState(10);
+export const BreedsSelect = ({ onChange }) => {
+  const [options, setOptions] = useState([]);
+  const [breedsNames, setBreedsNames] = useState([]);
 
-  const handleMemuItemClick = e => {
-    console.log(e.target.dataset.value);
-    setValue(e.target.dataset.value);
+  useEffect(() => {
+    catAPI.getBreedsName().then(resp => {
+      setBreedsNames(resp);
+    });
+  }, []);
+
+  useEffect(() => {
+    setOptions(breedsNames.map(breed => ({ value: breed, label: breed.name })));
+  }, [breedsNames]);
+
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      borderBottom: 'none',
+      backgroundColor: state.isSelected
+        ? '#FF868E'
+        : state.isFocused
+        ? '#FBE0DC'
+        : '#F8F8F7',
+
+      color: state.isSelected ? '#FFFFFF' : '#8C8C8C',
+      padding: 20,
+    }),
+    control: provided => ({
+      ...provided,
+      marginLeft: 10,
+      borderRadius: 10,
+      backgroundColor: '#F8F8F7',
+      border: 'none',
+      minHeight: 40,
+      width: 226,
+    }),
+
+    indicatorSeparator: provided => ({
+      ...provided,
+      display: 'none',
+    }),
+
+    singleValue: provided => ({
+      ...provided,
+      color: '#8C8C8C',
+    }),
+
+    menu: provided => ({
+      ...provided,
+      borderRadius: 30,
+      width: 226,
+      left: 10,
+      overflow: '-moz-scrollbars-none',
+    }),
+
+    menuList: provided => ({
+      ...provided,
+      borderRadius: 30,
+      padding: 0,
+      overflow: '-moz-scrollbars-none',
+    }),
   };
+
   return (
-    <FormControl
-      sx={{
-        width: 226,
-        height: 40,
-        ml: '10px',
-        borderBottomColor: 'red',
-      }}
-    >
-      <InputLabel id="demo-simple-select-label"></InputLabel>
-      <Select
-        sx={{
-          height: 40,
-          color: '#8C8C8C',
-          borderRadius: '10px',
-        }}
-        // variant="filled"
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={value}
-        onChange={console.log('handleChange')}
-      >
-        <MenuItem value={10} onClick={handleMemuItemClick}>
-          Ten
-        </MenuItem>
-        <MenuItem value={20} onClick={handleMemuItemClick}>
-          Twenty
-        </MenuItem>
-        <MenuItem value={30} onClick={handleMemuItemClick}>
-          Thirty
-        </MenuItem>
-      </Select>
-    </FormControl>
+    <Select
+      placeholder={'All breeds'}
+      options={options}
+      styles={customStyles}
+      onChange={onChange}
+    ></Select>
   );
 };

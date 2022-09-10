@@ -9,17 +9,14 @@ import {
 } from './BreedsGallery.styled';
 
 export const BreedsGallery = ({ breeds }) => {
-  console.log('BreedsGallery');
   return (
-    <StyledBreedsGallery perPage={breeds.data.length}>
-      {breeds.data.map((el, index) => {
+    <StyledBreedsGallery perPage={breeds.length}>
+      {breeds.map((el, index) => {
         return (
           <StyledItem
             key={el.id}
             gridPlace={
-              breeds.data.length > 20
-                ? (index % 20).toString()
-                : index.toString()
+              breeds.length > 20 ? (index % 20).toString() : index.toString()
             }
           >
             <StyledIMG src={el.url} alt={el.id} />

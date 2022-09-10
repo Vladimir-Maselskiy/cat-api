@@ -1,16 +1,19 @@
 import { BackBotton } from 'components/BackBotton/BackBotton';
 import { Box } from 'components/Box/Box';
 import { PageTitle } from 'components/PageTitle/PageTitle';
-import { useState } from 'react';
+import catAPI from 'utils/catAPI';
 import { BreedsSelect } from '../BreedsSelect/BreedsSelect';
 
-export const BreedsBar = () => {
-  const [breeds, setBreeds] = useState([]);
+export const BreedsBar = ({ setBreeds }) => {
+  const onChange = option => {
+    catAPI.getBreedsByBreedID(option.value.id).then(resp => setBreeds(resp));
+  };
+
   return (
     <Box display="flex">
       <BackBotton />
       <PageTitle title="BREEDS" />
-      <BreedsSelect breeds={breeds} setBreeds={setBreeds} />
+      <BreedsSelect onChange={onChange} />
     </Box>
   );
 };
