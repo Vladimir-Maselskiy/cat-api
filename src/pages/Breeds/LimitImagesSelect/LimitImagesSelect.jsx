@@ -1,20 +1,12 @@
-import { useEffect, useState } from 'react';
 import Select from 'react-select';
-import catAPI from 'utils/catAPI';
 
-export const BreedsSelect = ({ onChange }) => {
-  const [options, setOptions] = useState([]);
-  const [breedsNames, setBreedsNames] = useState([]);
-
-  useEffect(() => {
-    catAPI.getBreedsName().then(resp => {
-      setBreedsNames(resp);
-    });
-  }, []);
-
-  useEffect(() => {
-    setOptions(breedsNames.map(breed => ({ value: breed, label: breed.name })));
-  }, [breedsNames]);
+export const LimitImagesSelect = ({ onChangeLimit }) => {
+  const options = [
+    { value: 5, label: 'Limit: 5' },
+    { value: 10, label: 'Limit: 10' },
+    { value: 15, label: 'Limit: 15' },
+    { value: 20, label: 'Limit: 20' },
+  ];
 
   const customStyles = {
     option: (provided, state) => ({
@@ -35,8 +27,8 @@ export const BreedsSelect = ({ onChange }) => {
       borderRadius: 10,
       backgroundColor: '#F8F8F7',
       border: 'none',
-      minHeight: 40,
-      width: 226,
+      height: 40,
+      width: 101,
     }),
 
     indicatorSeparator: provided => ({
@@ -47,7 +39,18 @@ export const BreedsSelect = ({ onChange }) => {
     singleValue: provided => ({
       ...provided,
       color: '#8C8C8C',
-      lineHeight: 1.5,
+    }),
+
+    valueContainer: provided => ({
+      ...provided,
+      paddingRight: 0,
+      fontSize: 16,
+      whiteSpace: 'nowrap',
+    }),
+
+    dropdownIndicator: provided => ({
+      ...provided,
+      padding: '0 8px 0 0',
     }),
 
     menu: provided => ({
@@ -68,10 +71,10 @@ export const BreedsSelect = ({ onChange }) => {
 
   return (
     <Select
-      placeholder={'All breeds'}
+      placeholder={'Limit :10'}
       options={options}
       styles={customStyles}
-      onChange={onChange}
+      onChange={onChangeLimit}
     ></Select>
   );
 };
