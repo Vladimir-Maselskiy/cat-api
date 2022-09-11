@@ -13,7 +13,10 @@ export const BreedsSelect = ({ onChange }) => {
   }, []);
 
   useEffect(() => {
-    setOptions(breedsNames.map(breed => ({ value: breed, label: breed.name })));
+    setOptions([
+      { value: { id: 'allBreeds', name: 'All breeds' }, label: 'All breeds' },
+      ...breedsNames.map(breed => ({ value: breed, label: breed.name })),
+    ]);
   }, [breedsNames]);
 
   const customStyles = {
