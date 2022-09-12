@@ -29,6 +29,7 @@ export const LimitImagesSelect = ({ onChangeLimit }) => {
       border: 'none',
       height: 40,
       width: 101,
+      cursor: 'pointer',
     }),
 
     indicatorSeparator: provided => ({

@@ -40,6 +40,7 @@ export const BreedsSelect = ({ onChange }) => {
       border: 'none',
       minHeight: 40,
       width: 226,
+      cursor: 'pointer',
     }),
 
     indicatorSeparator: provided => ({

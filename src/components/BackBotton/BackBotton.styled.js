@@ -8,4 +8,5 @@ export const StyledBackBotton = styled.div`
   height: 40px;
   background-color: #fbe0dc;
   border-radius: 10px;
+  cursor: pointer;
 `;

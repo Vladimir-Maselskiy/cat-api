@@ -10,14 +10,31 @@ import { BreedsBar } from './BreedsBar/BreedsBar';
 export const Breeds = () => {
   const [breeds, setBreeds] = useState(null);
   const [limit, setLimit] = useState(10);
+  const [visibleBreeds, setVisibleBreeds] = useState(null);
 
   useEffect(() => {
-    catAPI.getBreeds().then(resp => setBreeds(resp));
+    catAPI.getBreeds().then(setBreeds);
   }, []);
+
+  useEffect(() => {
+    if (breeds) setVisibleBreeds(breeds.slice(0, limit));
+  }, [limit, breeds]);
 
   const onChangeLimit = option => {
     setLimit(option.value);
   };
+
+  const sortBreeds = order => {
+    console.log(order);
+
+    setVisibleBreeds([
+      ...visibleBreeds.sort((a, b) => {
+        if (order === 'DESC') return a.breeds[0].name > b.breeds[0].name;
+        return a.breeds[0].name < b.breeds[0].name;
+      }),
+    ]);
+  };
+
   return (
     <Box p="30px 30px 30px 65px">
       <Box bg="#FFFFFF" borderRadius={20}>
@@ -30,12 +47,11 @@ export const Breeds = () => {
           <BreedsBar
             setBreeds={setBreeds}
             onChangeLimit={onChangeLimit}
+            sortBreeds={sortBreeds}
           ></BreedsBar>
         </Box>
 
-        <Box mt={20}>
-          {breeds && <BreedsGallery breeds={breeds.slice(0, limit)} />}
-        </Box>
+        <Box mt={20}>{breeds && <BreedsGallery breeds={visibleBreeds} />}</Box>
       </Box>
     </Box>
   );

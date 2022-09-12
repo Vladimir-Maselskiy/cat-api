@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledBreedsGallery = styled.ul`
   display: grid;
   width: 640px;
-  max-height: 716px;
+  height: 716px;
   grid-template-areas:
     'img0 img1 img2'
     'img0 img3 img3'
@@ -31,19 +31,44 @@ export const StyledBreedsGallery = styled.ul`
 `;
 export const StyledItem = styled.li`
   display: block;
+  position: relative;
   grid-area: ${p => 'img' + p.gridPlace};
-  /* grid-area: nav01; */
-  /* height: 200px; */
 `;
 
 export const StyledIMG = styled.img`
   display: block;
   border-radius: 20px;
-
   object-fit: cover;
   object-position: 70% 10%;
   height: 100%;
   width: 100%;
-  /* height: 100%;
-  width: 100%; */
+`;
+export const StyledHoverIMGBox = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 10px 10px 10px;
+  border-radius: 20px;
+  object-fit: cover;
+  object-position: 70% 10%;
+  height: 100%;
+  width: 100%;
+  :hover {
+    background-color: #ff868e60;
+    opacity: 1;
+  }
+`;
+export const StyledHoverName = styled.div`
+  display: block;
+  height: 34px;
+  width: 100%;
+  text-align: center;
+  line-height: 34px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  object-fit: cover;
+  object-position: 70% 10%;
 `;

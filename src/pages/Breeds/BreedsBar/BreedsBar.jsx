@@ -3,11 +3,11 @@ import { Box } from 'components/Box/Box';
 import { PageTitle } from 'components/PageTitle/PageTitle';
 import catAPI from 'utils/catAPI';
 import { BreedsSelect } from '../BreedsSelect/BreedsSelect';
-import { DecrSortButton } from '../DecrSortButton/DecrSortButton';
-import { IncSortButton } from '../IncSortButton/IncSortButton';
+import { DescSortButton } from '../DescSortButton/DescSortButton';
+import { AscSortButton } from '../AscSortButton/AscSortButton';
 import { LimitImagesSelect } from '../LimitImagesSelect/LimitImagesSelect';
 
-export const BreedsBar = ({ setBreeds, onChangeLimit }) => {
+export const BreedsBar = ({ setBreeds, onChangeLimit, sortBreeds }) => {
   const onChange = option => {
     if (option.value.id === 'allBreeds') {
       catAPI.getBreeds().then(resp => setBreeds(resp));
@@ -22,8 +22,8 @@ export const BreedsBar = ({ setBreeds, onChangeLimit }) => {
       <PageTitle title="BREEDS" />
       <BreedsSelect onChange={onChange} />
       <LimitImagesSelect onChangeLimit={onChangeLimit} />
-      <DecrSortButton />
-      <IncSortButton />
+      <AscSortButton sortBreeds={sortBreeds} />
+      <DescSortButton sortBreeds={sortBreeds} />
     </Box>
   );
 };
