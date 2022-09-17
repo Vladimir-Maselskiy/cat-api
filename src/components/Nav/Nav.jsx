@@ -16,19 +16,19 @@ export const Nav = () => {
     <StyledNav>
       <StyledList>
         <ListItem>
-          <StyledNavLink to="./voting">
+          <StyledNavLink to="./nav-bar/voting">
             <ItemIMG color="#B4B7FF" img={voting}></ItemIMG>
             <ItemTitle>VOTING</ItemTitle>
           </StyledNavLink>
         </ListItem>
         <ListItem>
-          <StyledNavLink to="./breeds">
+          <StyledNavLink to="./nav-bar/breeds">
             <ItemIMG color="#97EAB9" img={breeds}></ItemIMG>
             <ItemTitle>BREEDS</ItemTitle>
           </StyledNavLink>
         </ListItem>
         <ListItem>
-          <StyledNavLink to="./gallery">
+          <StyledNavLink to="./nav-bar/gallery">
             <ItemIMG color="#FFD280" img={gallery}></ItemIMG>
             <ItemTitle>GALLERY</ItemTitle>
           </StyledNavLink>
