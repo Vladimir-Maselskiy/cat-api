@@ -30,6 +30,11 @@ export const StyledkBotton = styled.div`
   width: 80px;
   height: 80px;
   background-color: ${p => p.bg};
+  fill: #ffffff;
   /* border-radius: 20px; */
   cursor: pointer;
+  :hover {
+    background-color: ${p => `${p.bg}30`};
+    fill: ${p => p.bg};
+  }
 `;

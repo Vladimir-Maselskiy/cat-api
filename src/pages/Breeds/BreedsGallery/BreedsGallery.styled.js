@@ -17,7 +17,8 @@ export const StyledBreedsGallery = styled.ul`
     'img15 img16 img17'
     'img18 img18 img17'
     'img18 img18 img19';
-  grid-template-rows: ${p => `repeat(${(p.perPage / 5) * 3}, 140px)`};
+  grid-template-rows: ${p =>
+    `repeat(${Math.ceil((p.perPage / 5) * 3)}, 140px)`};
   grid-template-columns: 1fr 1fr 1fr;
   overflow-y: scroll;
   overflow: auto;

@@ -23,8 +23,6 @@ export const Breeds = () => {
   };
 
   const sortBreeds = order => {
-    console.log(order);
-
     setVisibleBreeds([
       ...visibleBreeds.sort((a, b) => {
         if (order === 'DESC') return a.breeds[0].name > b.breeds[0].name;
