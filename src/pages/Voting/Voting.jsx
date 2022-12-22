@@ -7,6 +7,7 @@ import { VotingBar } from './VotingBar/VotingBar';
 import { VotingButtons } from './VotingButtons/VotingButtons';
 import { VotingLogs } from './VotingLogs/VotingLogs';
 import { VotingView } from './VotingView/VotingView';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 export const Voting = ({ setUsersCatsArrays }) => {
   const [currentImg, setCurrentImg] = useState(null);
@@ -18,15 +19,21 @@ export const Voting = ({ setUsersCatsArrays }) => {
   }, []);
 
   useEffect(() => {
-    logsListRef.current.scrollTop = logsListRef.current.scrollHeight + 1000;
+    logsListRef.current.scrollTop =
+      logsListRef.current.scrollHeight + 1000;
   }, [logs]);
 
   const handleVotingButtonsClick = (type, icon, action) => {
     setUsersCatsArrays(type, currentImg);
     const date = moment().format('HH:mm');
-    setLogs(p => [...p, { type, action, id: currentImg.id, date, icon }]);
+    setLogs(p => [
+      ...p,
+      { type, action, id: currentImg.id, date, icon },
+    ]);
     if (type !== 'favourites') {
-      catAPI.getBreeds().then(resp => setCurrentImg(...resp));
+      catAPI
+        .getBreeds()
+        .then(resp => setCurrentImg(...resp));
     }
     if (type === 'favourites') {
       toggleFavoritStatus();
@@ -40,8 +47,8 @@ export const Voting = ({ setUsersCatsArrays }) => {
   return (
     <>
       <VotingBar />
-      <Box position="relative">
-        {currentImg && (
+      <Box position="relative" flexGrow={2}>
+        {currentImg ? (
           <>
             <VotingView currentImg={currentImg} />
             <VotingButtons
@@ -49,10 +56,15 @@ export const Voting = ({ setUsersCatsArrays }) => {
               isActive={currentImg.favorit}
             ></VotingButtons>
           </>
+        ) : (
+          <Spinner />
         )}
       </Box>
       <Box mt={52}>
-        <VotingLogs ref={logsListRef} logs={logs}></VotingLogs>
+        <VotingLogs
+          ref={logsListRef}
+          logs={logs}
+        ></VotingLogs>
       </Box>
     </>
   );

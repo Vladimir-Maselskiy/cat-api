@@ -10,7 +10,15 @@ export const NavLayout = () => {
         <FindBreedsForm />
         <LinksButtonBlock />
       </Box>
-      <Box bg="#FFFFFF" mt={20} borderRadius={20} p={20} minHeight={782}>
+      <Box
+        bg="#FFFFFF"
+        mt={20}
+        borderRadius={20}
+        p={20}
+        minHeight={782}
+        display="flex"
+        flexDirection="column"
+      >
         <Outlet />
       </Box>
     </Box>

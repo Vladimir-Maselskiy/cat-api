@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { BreedsGallery } from './BreedsGallery/BreedsGallery';
 import { useEffect } from 'react';
 import { BreedsBar } from './BreedsBar/BreedsBar';
+import { Spinner } from '../../components/Spinner/Spinner';
 
 export const Breeds = () => {
   const [breeds, setBreeds] = useState(null);
@@ -25,7 +26,8 @@ export const Breeds = () => {
   const sortBreeds = order => {
     setVisibleBreeds([
       ...visibleBreeds.sort((a, b) => {
-        if (order === 'DESC') return a.breeds[0].name > b.breeds[0].name;
+        if (order === 'DESC')
+          return a.breeds[0].name > b.breeds[0].name;
         return a.breeds[0].name < b.breeds[0].name;
       }),
     ]);
@@ -38,7 +40,19 @@ export const Breeds = () => {
         onChangeLimit={onChangeLimit}
         sortBreeds={sortBreeds}
       ></BreedsBar>
-      <Box mt={20}>{breeds && <BreedsGallery breeds={visibleBreeds} />}</Box>
+
+      <Box
+        position="relative"
+        mt={20}
+        display="flex"
+        flexGrow={2}
+      >
+        {breeds ? (
+          <BreedsGallery breeds={visibleBreeds} />
+        ) : (
+          <Spinner />
+        )}
+      </Box>
     </>
   );
 };
