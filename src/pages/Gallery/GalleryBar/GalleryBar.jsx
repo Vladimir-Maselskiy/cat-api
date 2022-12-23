@@ -13,7 +13,11 @@ import { GalleryTypeSelect } from '../GalleryTypeSelect/GalleryTypeSelect';
 // import { AscSortButton } from '../AscSortButton/AscSortButton';
 // import { LimitImagesSelect } from '../LimitImagesSelect/LimitImagesSelect';
 
-export const GalleryBar = ({ setBreeds, onChangeLimit, sortBreeds }) => {
+export const GalleryBar = ({
+  setBreeds,
+  onChangeLimit,
+  sortBreeds,
+}) => {
   // const onChange = option => {
   //   if (option.value.id === 'allBreeds') {
   //     catAPI.getBreeds().then(resp => setBreeds(resp));
@@ -21,9 +25,10 @@ export const GalleryBar = ({ setBreeds, onChangeLimit, sortBreeds }) => {
   //   }
   //   catAPI.getBreedsByBreedID(option.value.id).then(resp => setBreeds(resp));
   // };
-  const [breedSelectOptions, setBreedSelectOptions] = useState(['None']);
-  const [limit, setLimit] = useState(5);
-  const [visibleBreeds, setVisibleBreeds] = useState(null);
+  const [breedSelectOptions, setBreedSelectOptions] =
+    useState(['None']);
+  // const [limit, setLimit] = useState(5);
+  // const [visibleBreeds, setVisibleBreeds] = useState(null);
 
   useEffect(() => {
     catAPI.getBreedsName().then(resp => {
@@ -61,10 +66,22 @@ export const GalleryBar = ({ setBreeds, onChangeLimit, sortBreeds }) => {
         p="10px 20px 20px 20px"
         borderRadius={20}
       >
-        <GalleryOrderSelect title="ORDER" initialOptions={orderSelectOptions} />
-        <GalleryTypeSelect title="TYPE" initialOptions={typeSelectOptions} />
-        <GalleryBreedSelect title="BREED" initialOptions={breedSelectOptions} />
-        <GalleryLimitSelect title="LIMIT" initialOptions={limitSelectOptions} />
+        <GalleryOrderSelect
+          title="ORDER"
+          initialOptions={orderSelectOptions}
+        />
+        <GalleryTypeSelect
+          title="TYPE"
+          initialOptions={typeSelectOptions}
+        />
+        <GalleryBreedSelect
+          title="BREED"
+          initialOptions={breedSelectOptions}
+        />
+        <GalleryLimitSelect
+          title="LIMIT"
+          initialOptions={limitSelectOptions}
+        />
       </Box>
     </>
   );
