@@ -1,9 +1,10 @@
-import { Box } from 'components/Box/Box';
+import React from 'react';
+import { Box } from '../../components/Box/Box';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { GalleryBar } from './GalleryBar/GalleryBar';
 // import { StyledGallery } from './StyledGallery.styled';
 
-export const Gallery = ({ children }) => {
+export const Gallery = () => {
   return (
     <>
       <Box width={640}>
