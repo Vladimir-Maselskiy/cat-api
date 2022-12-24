@@ -11,9 +11,10 @@ import catAPI from '../../../utils/catAPI';
 import { IBreed } from '../../../interfaces/interfaces';
 
 type IsMulti = false;
+
 type MyOptionType = {
   label: string;
-  value: { id: string; name: string };
+  value: string;
 };
 
 interface IProp {
@@ -24,7 +25,7 @@ interface IProp {
 }
 
 interface IOption {
-  value: IBreed;
+  value: string;
   label: string;
 }
 
@@ -43,11 +44,11 @@ export const BreedsSelect = ({ onChange }: IProp) => {
   useEffect(() => {
     setOptions([
       {
-        value: { id: 'allBreeds', name: 'All breeds' },
+        value: 'All breeds',
         label: 'All breeds',
       },
       ...breedsNames.map(breed => ({
-        value: breed,
+        value: breed.name,
         label: breed.name,
       })),
     ]);
@@ -69,6 +70,7 @@ export const BreedsSelect = ({ onChange }: IProp) => {
       }),
       control: provided => ({
         ...provided,
+        boxShadow: 'none',
         marginLeft: 10,
         borderRadius: 10,
         backgroundColor: '#F8F8F7',

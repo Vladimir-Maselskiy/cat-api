@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const StyledBreedsGallery = styled.ul`
+export const StyledBreedsGallery = styled.ul<{
+  perPage: number;
+}>`
   display: grid;
   width: 640px;
   height: 716px;
@@ -30,7 +32,7 @@ export const StyledBreedsGallery = styled.ul`
   }
   gap: 20px;
 `;
-export const StyledItem = styled.li`
+export const StyledItem = styled.li<{ gridPlace: string }>`
   display: block;
   position: relative;
   grid-area: ${p => 'img' + p.gridPlace};

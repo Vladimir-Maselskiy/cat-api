@@ -1,31 +1,20 @@
 // import Select from 'react-select';
 import React from 'react';
-import Select, {
-  ActionMeta,
-  SingleValue,
-  StylesConfig,
-} from 'react-select';
+import Select, { StylesConfig } from 'react-select';
+import {
+  IPropReactSelect,
+  MyOptionType,
+} from '../../../interfaces/interfaces';
 type IsMulti = false;
-type MyOptionType = {
-  label: string;
-  value: number;
-};
-
-interface IProp {
-  onChangeLimit: (
-    newValue: SingleValue<MyOptionType>,
-    actionMeta: ActionMeta<MyOptionType>
-  ) => void;
-}
 
 export const LimitImagesSelect = ({
   onChangeLimit,
-}: IProp) => {
+}: IPropReactSelect) => {
   const options = [
-    { value: 5, label: 'Limit: 5' },
-    { value: 10, label: 'Limit: 10' },
-    { value: 15, label: 'Limit: 15' },
-    { value: 20, label: 'Limit: 20' },
+    { value: '5', label: 'Limit: 5' },
+    { value: '10', label: 'Limit: 10' },
+    { value: '15', label: 'Limit: 15' },
+    { value: '20', label: 'Limit: 20' },
   ];
 
   const customStyles: StylesConfig<MyOptionType, IsMulti> =
@@ -45,6 +34,7 @@ export const LimitImagesSelect = ({
       control: provided => ({
         ...provided,
         marginLeft: 10,
+        boxShadow: 'none',
         borderRadius: 10,
         backgroundColor: '#F8F8F7',
         border: 'none',

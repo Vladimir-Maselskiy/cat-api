@@ -7,7 +7,11 @@ import {
   StyledItem,
 } from './BreedsGallery.styled';
 
-export const BreedsGallery = ({ breeds }) => {
+interface IProps {
+  breeds: any[] | null;
+}
+
+export const BreedsGallery = ({ breeds }: IProps) => {
   return (
     breeds && (
       <StyledBreedsGallery perPage={breeds.length}>
