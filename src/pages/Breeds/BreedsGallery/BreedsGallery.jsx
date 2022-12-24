@@ -1,7 +1,4 @@
-// import { Box } from 'components/Box/Box';
-// import { StyledBreeds } from './StyledBreeds.styled';
-// import { useState } from 'react';
-
+import React from 'react';
 import {
   StyledBreedsGallery,
   StyledHoverIMGBox,
@@ -19,12 +16,16 @@ export const BreedsGallery = ({ breeds }) => {
             <StyledItem
               key={el.id}
               gridPlace={
-                breeds.length > 20 ? (index % 20).toString() : index.toString()
+                breeds.length > 20
+                  ? (index % 20).toString()
+                  : index.toString()
               }
             >
               <StyledHoverIMGBox>
                 <StyledHoverName>
-                  {el.breeds[0].name !== '' ? el.breeds[0].name : '(^◔ᴥ◔^)'}
+                  {el.breeds[0].name !== ''
+                    ? el.breeds[0].name
+                    : '(^◔ᴥ◔^)'}
                 </StyledHoverName>
               </StyledHoverIMGBox>
               <StyledIMG src={el.url} alt={el.id} />

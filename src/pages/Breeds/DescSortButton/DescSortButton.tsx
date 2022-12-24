@@ -1,10 +1,10 @@
 import { StyledBotton } from '../DescSortButton/DescSortButton.styled';
 import React from 'react';
+import { IPropSortBreeds } from '../../../interfaces/interfaces';
 
-interface IProp {
-  sortBreeds: (t: string) => void;
-}
-export const DescSortButton = ({ sortBreeds }: IProp) => {
+export const DescSortButton = ({
+  sortBreeds,
+}: IPropSortBreeds) => {
   return (
     <StyledBotton onClick={() => sortBreeds('DESC')}>
       <svg

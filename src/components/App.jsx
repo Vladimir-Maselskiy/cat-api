@@ -1,4 +1,3 @@
-// import { Box } from './Box/Box';
 import { Breeds } from 'pages/Breeds/Breeds';
 import { Gallery } from 'pages/Gallery/Gallery';
 import { Voting } from 'pages/Voting/Voting';
@@ -21,10 +20,16 @@ export const App = () => {
         setLikes(p => [...p, currentCat]);
         break;
       case 'favourites':
-        if (favourites.findIndex(cat => cat.id === currentCat.id) === -1) {
+        if (
+          favourites.findIndex(
+            cat => cat.id === currentCat.id
+          ) === -1
+        ) {
           setFavourites(p => [...p, currentCat]);
         } else {
-          setFavourites(p => p.filter(cat => cat.id !== currentCat.id));
+          setFavourites(p =>
+            p.filter(cat => cat.id !== currentCat.id)
+          );
         }
         break;
       case 'dislikes':
@@ -42,14 +47,23 @@ export const App = () => {
         <Route path="/nav-bar" element={<NavLayout />}>
           <Route
             path="voting"
-            element={<Voting setUsersCatsArrays={setUsersCatsArrays} />}
+            element={
+              <Voting
+                setUsersCatsArrays={setUsersCatsArrays}
+              />
+            }
           ></Route>
           <Route path="breeds" element={<Breeds />}></Route>
-          <Route path="gallery" element={<Gallery />}></Route>
+          <Route
+            path="gallery"
+            element={<Gallery />}
+          ></Route>
           <Route
             path="cats-groups/:group"
             element={
-              <CatsGroupsLayout groups={{ likes, favourites, dislikes }} />
+              <CatsGroupsLayout
+                groups={{ likes, favourites, dislikes }}
+              />
             }
           ></Route>
         </Route>

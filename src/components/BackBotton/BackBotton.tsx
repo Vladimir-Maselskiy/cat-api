@@ -1,3 +1,4 @@
+import React from 'react';
 import { StyledBackBotton } from './BackBotton.styled';
 
 export const BackBotton = () => {
