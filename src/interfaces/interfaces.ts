@@ -20,3 +20,8 @@ export interface IPropReactSelect {
     actionMeta: ActionMeta<MyOptionType>
   ) => void;
 }
+
+export interface IPropGallery {
+  title: string;
+  initialOptions: string[];
+}
