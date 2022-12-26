@@ -1,7 +1,29 @@
-import { StyledBottonsBox, StyledkBotton } from './VotingButtons.styled';
+import React from 'react';
+import {
+  StyledBottonsBox,
+  StyledkBotton,
+} from './VotingButtons.styled';
 
-export const VotingButtons = ({ isActive, handleClick }) => {
-  const Likes = ({ width, height, fill }) => {
+interface IProps {
+  isActive: boolean;
+  handleClick: (
+    type: 'likes' | 'favourites' | 'dislikes',
+    el: JSX.Element | null,
+    k: boolean
+  ) => void;
+}
+
+type ButtonProps = {
+  width: number;
+  height: number;
+  fill: string;
+};
+
+export const VotingButtons = ({
+  isActive,
+  handleClick,
+}: IProps) => {
+  const Likes = ({ width, height, fill }: ButtonProps) => {
     return (
       <svg
         width={width}
@@ -18,7 +40,11 @@ export const VotingButtons = ({ isActive, handleClick }) => {
       </svg>
     );
   };
-  const Favourites = ({ width, height, fill }) => {
+  const Favourites = ({
+    width,
+    height,
+    fill,
+  }: ButtonProps) => {
     return isActive ? (
       <svg
         width="30"
@@ -48,7 +74,11 @@ export const VotingButtons = ({ isActive, handleClick }) => {
       </svg>
     );
   };
-  const Dislikes = ({ width, height, fill }) => {
+  const Dislikes = ({
+    width,
+    height,
+    fill,
+  }: ButtonProps) => {
     return (
       <svg
         width={width}
@@ -85,7 +115,11 @@ export const VotingButtons = ({ isActive, handleClick }) => {
           handleClick(
             'favourites',
             isActive ? null : (
-              <Favourites width={20} height={17.33} fill="#FF868E" />
+              <Favourites
+                width={20}
+                height={17.33}
+                fill="#FF868E"
+              />
             ),
             isActive ? false : true
           )
@@ -98,7 +132,11 @@ export const VotingButtons = ({ isActive, handleClick }) => {
         onClick={() =>
           handleClick(
             'dislikes',
-            <Dislikes width={20} height={20} fill="#FFD280" />,
+            <Dislikes
+              width={20}
+              height={20}
+              fill="#FFD280"
+            />,
             true
           )
         }

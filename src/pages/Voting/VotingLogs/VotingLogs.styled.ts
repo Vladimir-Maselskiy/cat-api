@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledLogsList = styled.ul`
+export const StyledLogsList = styled.ul<{ ref: any }>`
   max-height: 280px;
   font-size: 16px;
   line-height: 60px;

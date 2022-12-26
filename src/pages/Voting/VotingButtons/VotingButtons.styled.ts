@@ -23,7 +23,7 @@ export const StyledBottonsBox = styled.div`
   border-radius: 20px;
 `;
 
-export const StyledkBotton = styled.div`
+export const StyledkBotton = styled.div<{ bg: string }>`
   display: flex;
   align-items: center;
   justify-content: center;

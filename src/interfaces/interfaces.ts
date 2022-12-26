@@ -25,3 +25,13 @@ export interface IPropGallery {
   title: string;
   initialOptions: string[];
 }
+
+export interface IPropsVoting {
+  logs: {
+    date: string;
+    action: boolean;
+    type: string;
+    id: string | undefined;
+    icon: JSX.Element | null;
+  }[];
+}
