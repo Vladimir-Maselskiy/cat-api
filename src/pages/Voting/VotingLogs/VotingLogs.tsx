@@ -6,7 +6,9 @@ import {
   StyledLog,
   StyledLogsList,
 } from './VotingLogs.styled';
-var nanoid = require('../../../../node_modules/nanoid/index');
+var {
+  nanoid,
+} = require('../../../../node_modules/nanoid/index');
 
 export const VotingLogs = forwardRef(
   ({ logs }: IPropsVoting, ref) => {

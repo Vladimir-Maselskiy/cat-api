@@ -76,20 +76,20 @@ export const Voting = ({ setUsersCatsArrays }: IProps) => {
   return (
     <>
       <VotingBar />
-      <Box position="relative" flexGrow={2}>
+      <Box position="relative">
         {currentImg ? (
-          <>
+          <Box position="relative">
             <VotingView currentImg={currentImg} />
             <VotingButtons
               handleClick={handleVotingButtonsClick}
               isActive={currentImg.favorit}
             ></VotingButtons>
-          </>
+          </Box>
         ) : (
           <Spinner />
         )}
       </Box>
-      <Box mt={52}>
+      <Box mt={52} flexGrow={2}>
         <VotingLogs
           ref={logsListRef}
           logs={logs}
