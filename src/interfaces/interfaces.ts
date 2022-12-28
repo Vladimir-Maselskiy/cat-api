@@ -24,6 +24,11 @@ export interface IPropReactSelect {
 export interface IPropGallery {
   title: string;
   initialOptions: string[];
+  onChange: (
+    newValue: SingleValue<MyOptionType>,
+    actionMeta: ActionMeta<MyOptionType>
+  ) => void;
+  name: string;
 }
 
 export interface IPropsVoting {

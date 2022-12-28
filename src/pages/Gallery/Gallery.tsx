@@ -1,7 +1,9 @@
 import { MyOptionType } from 'interfaces/interfaces';
 import React, { useEffect, useState } from 'react';
-import { SingleValue } from 'react-select';
+import { ActionMeta, SingleValue } from 'react-select';
 import catAPI from 'utils/catAPI';
+import { getArrayOfBreedsWithCurrentType } from 'utils/getArrayOfBreedsWithCurrentType';
+import { sortVisibleImageItems } from 'utils/sortVisibleImageItems';
 import { Box } from '../../components/Box/Box';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { GalleryBar } from './GalleryBar/GalleryBar';
@@ -10,14 +12,20 @@ import { GalleryImagesGallery } from './GalleryImagesGallery/GalleryImagesGaller
 export const Gallery = () => {
   const [breeds, setBreeds] = useState<any[] | null>(null);
   const [limit, setLimit] = useState<string | undefined>(
-    '10'
+    '5'
   );
   const [visibleBreeds, setVisibleBreeds] = useState<
     any[] | null
   >(null);
 
   useEffect(() => {
-    catAPI.getBreeds({ limit: '5' }).then(setBreeds);
+    console.log('visibleBreeds', visibleBreeds);
+  }, [visibleBreeds]);
+
+  useEffect(() => {
+    catAPI
+      .getBreeds({ limit: '20', hasBreeds: '0' })
+      .then(setBreeds);
   }, []);
 
   useEffect(() => {
@@ -25,41 +33,49 @@ export const Gallery = () => {
       setVisibleBreeds(breeds.slice(0, +limit));
   }, [limit, breeds]);
 
-  const onChangeLimit = (
-    option: SingleValue<MyOptionType>
+  const onChange = (
+    newValue: SingleValue<MyOptionType>,
+    actionMeta: ActionMeta<MyOptionType>
   ): void => {
-    setLimit(option?.value);
-  };
+    switch (actionMeta.name) {
+      case 'ORDER':
+        if (breeds)
+          setBreeds(
+            sortVisibleImageItems({
+              visibleBreeds: breeds,
+              order: newValue?.value,
+            })
+          );
+        break;
+      case 'TYPE':
+        if (newValue?.value && breeds) {
+          getArrayOfBreedsWithCurrentType({
+            type: newValue.value,
+            breeds,
+          }).then(setBreeds);
+        }
 
-  const sortBreeds = (order: 'DESC' | 'ASK' | 'RANDOM') => {
-    if (visibleBreeds) {
-      setVisibleBreeds([
-        ...visibleBreeds.sort((a, b) => {
-          if (order === 'DESC') {
-            if (a.breeds[0].name < b.breeds[0].name)
-              return 1;
-            if (a.breeds[0].name > b.breeds[0].name)
-              return -1;
-            return 0;
-          }
-
-          if (b.breeds[0].name > a.breeds[0].name)
-            return -1;
-          if (b.breeds[0].name < a.breeds[0].name) return 1;
-          return 0;
-        }),
-      ]);
+        break;
+      case 'BREED':
+        break;
+      case 'LIMIT':
+        if (newValue?.value)
+          setLimit(parseInt(newValue.value).toString());
+        break;
     }
+    console.log('newValue', newValue);
+    console.log('actionMeta', actionMeta);
   };
+
   return (
     <>
       <Box width={640}>
         <GalleryBar
           // setBreeds={setBreeds}
-          onChangeLimit={onChangeLimit}
+          onChange={onChange}
+
           // sortBreeds={sortBreeds}
         />
-        {/* <Box mt={20}>{breeds && <BreedsGallery breeds={visibleBreeds} />}</Box> */}
       </Box>
       <Box
         position="relative"

@@ -1,6 +1,6 @@
 interface IParams {
   visibleBreeds: any[];
-  order: 'DESC' | 'ASC' | 'RANDOM';
+  order: string | undefined;
 }
 
 export const sortVisibleImageItems = ({
@@ -10,8 +10,8 @@ export const sortVisibleImageItems = ({
   return [
     ...visibleBreeds.sort((a, b) => {
       if (order === 'RANDOM') {
-        if (a.breeds[0].id < b.breeds[0].id) return 1;
-        if (a.breeds[0].id > b.breeds[0].id) return -1;
+        if (a.id < b.id) return 1;
+        if (a.id > b.id) return -1;
         return 0;
       }
 
@@ -21,8 +21,11 @@ export const sortVisibleImageItems = ({
         return 0;
       }
 
-      if (b.breeds[0].name > a.breeds[0].name) return -1;
-      if (b.breeds[0].name < a.breeds[0].name) return 1;
+      if (order === 'ASC') {
+        if (b.breeds[0].name > a.breeds[0].name) return -1;
+        if (b.breeds[0].name < a.breeds[0].name) return 1;
+        return 0;
+      }
       return 0;
     }),
   ];

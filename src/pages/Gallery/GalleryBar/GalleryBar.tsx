@@ -13,19 +13,15 @@ import { MyOptionType } from 'interfaces/interfaces';
 
 interface IProps {
   setBreeds?: (t: any) => void;
-  onChangeLimit: (
+  onChange: (
     newValue: SingleValue<MyOptionType>,
     actionMeta: ActionMeta<MyOptionType>
   ) => void;
-  sortBreeds?: (order: string) => void;
-  limit?: string | undefined;
 }
 
 export const GalleryBar = ({
   setBreeds,
-  onChangeLimit,
-  sortBreeds,
-  limit,
+  onChange,
 }: IProps) => {
   const [breedSelectOptions, setBreedSelectOptions] =
     useState<string[]>(['None']);
@@ -71,18 +67,26 @@ export const GalleryBar = ({
         <GalleryOrderSelect
           title="ORDER"
           initialOptions={orderSelectOptions}
+          onChange={onChange}
+          name="ORDER"
         />
         <GalleryTypeSelect
           title="TYPE"
           initialOptions={typeSelectOptions}
+          onChange={onChange}
+          name="TYPE"
         />
         <GalleryBreedSelect
           title="BREED"
           initialOptions={breedSelectOptions}
+          onChange={onChange}
+          name="BREED"
         />
         <GalleryLimitSelect
           title="LIMIT"
           initialOptions={limitSelectOptions}
+          onChange={onChange}
+          name="LIMIT"
         />
       </Box>
     </>

@@ -15,6 +15,7 @@ interface IProp {
     actionMeta: ActionMeta<MyOptionType>
   ) => void;
   initialOptions: string[];
+  name: string;
 }
 
 type IsMulti = false;
@@ -22,6 +23,7 @@ type IsMulti = false;
 export const GallarySelectTemplate = ({
   onChange,
   initialOptions,
+  name,
 }: IProp) => {
   const [options, setOptions] = useState<MyOptionType[]>(
     []
@@ -44,7 +46,7 @@ export const GallarySelectTemplate = ({
   useEffect(() => {
     setOptions([
       ...initialOptions.map(optionName => ({
-        value: optionName,
+        value: optionName.toUpperCase(),
         label: optionName,
       })),
     ]);
@@ -120,6 +122,7 @@ export const GallarySelectTemplate = ({
         options={options}
         styles={customStyles}
         onChange={onChange}
+        name={name}
       ></Select>
     </StyledSelectBox>
   );
