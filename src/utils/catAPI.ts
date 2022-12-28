@@ -9,17 +9,19 @@ axios.defaults.headers.common['x-api-key'] = api_key;
 
 export const getBreeds = (params: {
   limit?: string;
+  page?: string;
   hasBreeds?: string;
   breedIds?: string;
 }): Promise<any[]> => {
   const {
-    limit = 1,
+    limit = '1',
+    page = '1',
     hasBreeds = '0',
     breedIds = '',
   } = params;
   return axios
     .get(
-      `/v1/images/search?limit=${limit}&attach_breed=20&has_breeds=${hasBreeds}&breed_ids=${breedIds}`
+      `/v1/images/search?limit=${limit}&page=${page}&attach_breed=20&has_breeds=${hasBreeds}&breed_ids=${breedIds}`
     )
     .then(
       (resp: {

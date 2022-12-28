@@ -2,7 +2,10 @@ import { MyOptionType } from 'interfaces/interfaces';
 import React, { useEffect, useState } from 'react';
 import { ActionMeta, SingleValue } from 'react-select';
 import catAPI from 'utils/catAPI';
-import { getArrayOfBreedsWithCurrentType } from 'utils/getArrayOfBreedsWithCurrentType';
+import {
+  clearArray,
+  getArrayOfBreedsWithCurrentType,
+} from 'utils/getArrayOfBreedsWithCurrentType';
 import { sortVisibleImageItems } from 'utils/sortVisibleImageItems';
 import { Box } from '../../components/Box/Box';
 import { Spinner } from '../../components/Spinner/Spinner';
@@ -49,6 +52,7 @@ export const Gallery = () => {
         break;
       case 'TYPE':
         if (newValue?.value && breeds) {
+          clearArray();
           getArrayOfBreedsWithCurrentType({
             type: newValue.value,
             breeds,
