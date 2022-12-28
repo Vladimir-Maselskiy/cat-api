@@ -7,11 +7,20 @@ const api_key =
 axios.defaults.baseURL = 'https://api.thecatapi.com';
 axios.defaults.headers.common['x-api-key'] = api_key;
 
-export const getBreeds = (
-  limit: number = 1
-): Promise<any[]> => {
+export const getBreeds = (params: {
+  limit?: string;
+  hasBreeds?: string;
+  breedIds?: string;
+}): Promise<any[]> => {
+  const {
+    limit = 1,
+    hasBreeds = '0',
+    breedIds = '',
+  } = params;
   return axios
-    .get(`/v1/images/search?limit=${limit}&attach_breed=20`)
+    .get(
+      `/v1/images/search?limit=${limit}&attach_breed=20&has_breeds=${hasBreeds}&breed_ids=${breedIds}`
+    )
     .then(
       (resp: {
         data: {

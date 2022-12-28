@@ -8,22 +8,28 @@ import { BreedsBar } from './BreedsBar/BreedsBar';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { MyOptionType } from '../../interfaces/interfaces';
 import { SingleValue } from 'react-select';
+import { sortVisibleImageItems } from 'utils/sortVisibleImageItems';
 
 // interface IBreeds  {}
 
 export const Breeds = () => {
   const [breeds, setBreeds] = useState<any[] | null>(null);
-  const [limit, setLimit] = useState<any | null>(10);
+  const [limit, setLimit] = useState<string | undefined>(
+    '10'
+  );
   const [visibleBreeds, setVisibleBreeds] = useState<
     any[] | null
   >(null);
 
   useEffect(() => {
-    catAPI.getBreeds(20).then(setBreeds);
+    catAPI
+      .getBreeds({ limit: '20', hasBreeds: '1' })
+      .then(setBreeds);
   }, []);
 
   useEffect(() => {
-    if (breeds) setVisibleBreeds(breeds.slice(0, limit));
+    if (breeds && limit)
+      setVisibleBreeds(breeds.slice(0, +limit));
   }, [limit, breeds]);
 
   const onChangeLimit = (
@@ -32,21 +38,19 @@ export const Breeds = () => {
     setLimit(option?.value);
   };
 
-  const sortBreeds = (order: string) => {
-    if (visibleBreeds)
+  const sortBreeds = (order: 'DESC' | 'ASC' | 'RANDOM') => {
+    if (visibleBreeds) {
       setVisibleBreeds(
-        visibleBreeds.sort((a, b) => {
-          if (order === 'DESC')
-            return a.breeds[0].name - b.breeds[0].name;
-          return b.breeds[0].name - a.breeds[0].name;
-        })
+        sortVisibleImageItems({ visibleBreeds, order })
       );
+    }
   };
 
   return (
     <>
       <BreedsBar
         setBreeds={setBreeds}
+        limit={limit}
         onChangeLimit={onChangeLimit}
         sortBreeds={sortBreeds}
       ></BreedsBar>

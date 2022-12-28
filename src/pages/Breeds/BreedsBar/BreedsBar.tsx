@@ -1,4 +1,3 @@
-import React from 'react';
 import { BackBotton } from '../../../components/BackBotton/BackBotton';
 import { Box } from '../../../components/Box/Box';
 import { PageTitle } from '../../../components/PageTitle/PageTitle';
@@ -15,7 +14,8 @@ interface IProps {
     newValue: SingleValue<MyOptionType>,
     actionMeta: ActionMeta<MyOptionType>
   ) => void;
-  sortBreeds: (order: string) => void;
+  sortBreeds: (order: 'DESC' | 'ASC' | 'RANDOM') => void;
+  limit: string | undefined;
 }
 
 type MyOptionType = {
@@ -27,14 +27,15 @@ export const BreedsBar = ({
   setBreeds,
   onChangeLimit,
   sortBreeds,
+  limit,
 }: IProps) => {
   const onChange = (option: SingleValue<MyOptionType>) => {
-    if (option?.value === 'allBreeds') {
-      catAPI.getBreeds().then(resp => setBreeds(resp));
-      return;
-    }
     catAPI
-      .getBreedsByBreedID(option?.value)
+      .getBreeds({
+        breedIds: option?.value,
+        limit,
+        hasBreeds: '1',
+      })
       .then(resp => setBreeds(resp));
   };
 

@@ -6,7 +6,7 @@ export interface IBreed {
 }
 
 export interface IPropSortBreeds {
-  sortBreeds: (t: string) => void;
+  sortBreeds: (t: 'DESC' | 'ASC' | 'RANDOM') => void;
 }
 
 export type MyOptionType = {

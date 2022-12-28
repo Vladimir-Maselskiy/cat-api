@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import React from 'react';
 import Select, {
   ActionMeta,
   SingleValue,
@@ -22,6 +21,7 @@ interface IProp {
     newValue: SingleValue<MyOptionType>,
     actionMeta: ActionMeta<MyOptionType>
   ) => void;
+  
 }
 
 interface IOption {
@@ -37,6 +37,7 @@ export const BreedsSelect = ({ onChange }: IProp) => {
 
   useEffect(() => {
     catAPI.getBreedsName().then(resp => {
+      console.log('resp', resp);
       setBreedsNames(resp);
     });
   }, []);
@@ -44,11 +45,11 @@ export const BreedsSelect = ({ onChange }: IProp) => {
   useEffect(() => {
     setOptions([
       {
-        value: 'All breeds',
+        value: '',
         label: 'All breeds',
       },
       ...breedsNames.map(breed => ({
-        value: breed.name,
+        value: breed.id,
         label: breed.name,
       })),
     ]);

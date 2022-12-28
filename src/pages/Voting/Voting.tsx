@@ -35,7 +35,7 @@ export const Voting = ({ setUsersCatsArrays }: IProps) => {
   const logsListRef = useRef<HTMLUListElement>();
 
   useEffect(() => {
-    catAPI.getBreeds().then(resp => {
+    catAPI.getBreeds({}).then(resp => {
       const currentImg = resp[0];
       setCurrentImg(currentImg);
     });
@@ -46,6 +46,10 @@ export const Voting = ({ setUsersCatsArrays }: IProps) => {
       logsListRef.current.scrollTop =
         logsListRef.current.scrollHeight + 1000;
   }, [logs]);
+
+  const toggleFavoritStatus = () => {
+    setCurrentImg(p => ({ ...p, favorit: !p?.favorit }));
+  };
 
   const handleVotingButtonsClick = (
     type: 'likes' | 'favourites' | 'dislikes',
@@ -59,7 +63,7 @@ export const Voting = ({ setUsersCatsArrays }: IProps) => {
       { type, action, id: currentImg?.id, date, icon },
     ]);
     if (type !== 'favourites') {
-      catAPI.getBreeds().then(resp => {
+      catAPI.getBreeds({}).then(resp => {
         const currentImg = resp[0];
         setCurrentImg(currentImg);
       });
@@ -69,14 +73,10 @@ export const Voting = ({ setUsersCatsArrays }: IProps) => {
     }
   };
 
-  const toggleFavoritStatus = () => {
-    setCurrentImg(p => ({ ...p, favorit: !p?.favorit }));
-  };
-
   return (
     <>
       <VotingBar />
-      <Box position="relative">
+      <Box position="relative" flexGrow={1}>
         {currentImg ? (
           <Box position="relative">
             <VotingView currentImg={currentImg} />
@@ -89,12 +89,14 @@ export const Voting = ({ setUsersCatsArrays }: IProps) => {
           <Spinner />
         )}
       </Box>
-      <Box mt={52} flexGrow={2}>
-        <VotingLogs
-          ref={logsListRef}
-          logs={logs}
-        ></VotingLogs>
-      </Box>
+      {logs.length > 0 && (
+        <Box mt={52} flexGrow={2} minHeight={280}>
+          <VotingLogs
+            ref={logsListRef}
+            logs={logs}
+          ></VotingLogs>
+        </Box>
+      )}
     </>
   );
 };
