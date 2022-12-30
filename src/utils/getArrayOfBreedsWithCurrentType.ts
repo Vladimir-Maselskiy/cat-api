@@ -1,34 +1,58 @@
 import catAPI from './catAPI';
 
-type TParams = {
+type TPropType = {
   type: string;
-  breeds: any[];
 };
+type TPropExtention = {
+  extention: string;
+};
+
+type TParams = {
+  breeds: any[];
+  setBreeds: React.Dispatch<
+    React.SetStateAction<any[] | null>
+  >;
+};
+
+type TGetBreedsByExtention = TParams & TPropExtention;
+type TGetArrayOfBreedsWithCurrentType = TParams & TPropType;
+
 let typedBreeds: any[] = [];
 let page = 0;
 
 const getBreedsByExtention = async ({
   extention,
   breeds,
-}: {
-  extention: string;
-  breeds: any[];
-}) => {
-  typedBreeds = [
-    ...typedBreeds,
-    ...breeds.filter(
-      breed => breed.url.split('.').pop() === extention
-    ),
-  ];
+  setBreeds,
+}: TGetBreedsByExtention) => {
+  if (extention === 'any') {
+    typedBreeds = [...typedBreeds, ...breeds];
+  }
+  if (extention === 'jpg' || extention === 'gif') {
+    typedBreeds = [
+      ...typedBreeds,
+      ...breeds.filter(
+        breed => breed.url.split('.').pop() === extention
+      ),
+    ];
+  }
+
+  if (typedBreeds.length > 20) {
+    typedBreeds = typedBreeds.slice(0, 20);
+  }
+  setBreeds(typedBreeds);
   if (typedBreeds.length < 20) {
     page += 1;
     const newBreeds = await catAPI.getBreeds({
       limit: '20',
       page: String(page),
     });
+    const type =
+      extention === 'jpg' ? 'STATIC' : 'ANIMATED';
     await getArrayOfBreedsWithCurrentType({
-      type: extention === 'jpg' ? 'STATIC' : 'ANIMATED',
+      type,
       breeds: newBreeds,
+      setBreeds,
     });
   }
 };
@@ -36,12 +60,14 @@ const getBreedsByExtention = async ({
 export const getArrayOfBreedsWithCurrentType = async ({
   type,
   breeds,
-}: TParams): Promise<any[]> => {
-  console.log('typedBreeds', typedBreeds);
+  setBreeds,
+}: TGetArrayOfBreedsWithCurrentType): Promise<any[]> => {
+  if (typedBreeds.length === 20) return breeds;
   if (type === 'STATIC') {
     await getBreedsByExtention({
       extention: 'jpg',
       breeds,
+      setBreeds,
     });
     return typedBreeds;
   }
@@ -49,10 +75,16 @@ export const getArrayOfBreedsWithCurrentType = async ({
     await getBreedsByExtention({
       extention: 'gif',
       breeds,
+      setBreeds,
     });
     return typedBreeds;
   }
-  return breeds;
+  await getBreedsByExtention({
+    extention: 'any',
+    breeds,
+    setBreeds,
+  });
+  return typedBreeds;
 };
 
 export const clearArray = () => {

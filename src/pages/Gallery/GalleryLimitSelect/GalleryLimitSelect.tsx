@@ -7,7 +7,7 @@ import { StyledTitle } from '../StyledGallery.styled';
 export const GalleryLimitSelect = (prop: IPropGallery) => {
   const { title } = prop;
   return (
-    <Box width={290}>
+    <Box width={240}>
       <StyledTitle>{title}</StyledTitle>
       <GallarySelectTemplate {...prop} />
     </Box>

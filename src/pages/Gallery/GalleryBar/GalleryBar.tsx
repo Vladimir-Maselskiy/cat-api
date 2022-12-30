@@ -1,4 +1,3 @@
-import React from 'react';
 import { BackBotton } from '../../../components/BackBotton/BackBotton';
 import { Box } from '../../../components/Box/Box';
 import { PageTitle } from '../../../components/PageTitle/PageTitle';
@@ -8,25 +7,47 @@ import { GalleryBreedSelect } from '../GalleryBreedSelect/GalleryBreedSelect';
 import { GalleryLimitSelect } from '../GalleryLimitSelect/GalleryLimitSelect';
 import { GalleryOrderSelect } from '../GalleryOrderSelect/GalleryOrderSelect';
 import { GalleryTypeSelect } from '../GalleryTypeSelect/GalleryTypeSelect';
-import { ActionMeta, SingleValue } from 'react-select';
+import {
+  ActionMeta,
+  PropsValue,
+  SingleValue,
+} from 'react-select';
 import { MyOptionType } from 'interfaces/interfaces';
+import { ReloadImagesButton } from '../ReloadImagesButton/ReloadImagesButton';
+import {
+  limitSelectOptions,
+  orderSelectOptions,
+  typeSelectOptions,
+} from '../../../data/const';
 
 interface IProps {
-  setBreeds?: (t: any) => void;
+  placeHolders: {
+    limit: string;
+    currentBreed: string;
+    type: string;
+    order: string;
+  };
+  onReloadButtonClic: () => void;
   onChange: (
     newValue: SingleValue<MyOptionType>,
     actionMeta: ActionMeta<MyOptionType>
   ) => void;
+  values: {
+    limit: PropsValue<MyOptionType>;
+    currentBreed: PropsValue<MyOptionType>;
+    type: PropsValue<MyOptionType>;
+    order: PropsValue<MyOptionType>;
+  };
 }
 
 export const GalleryBar = ({
-  setBreeds,
+  onReloadButtonClic,
   onChange,
+  placeHolders,
+  values,
 }: IProps) => {
   const [breedSelectOptions, setBreedSelectOptions] =
     useState<string[]>(['None']);
-  // const [limit, setLimit] = useState(5);
-  // const [visibleBreeds, setVisibleBreeds] = useState(null);
 
   useEffect(() => {
     catAPI.getBreedsName().then(resp => {
@@ -35,25 +56,11 @@ export const GalleryBar = ({
     });
   }, []);
 
-  const orderSelectOptions = ['Random', 'Desc', 'Asc'];
-  const typeSelectOptions = ['All', 'Static', 'Animated'];
-  const limitSelectOptions = [
-    '5 items per page',
-    '10 items per page',
-    '15 items per page',
-    '20 items per page',
-  ];
-
   return (
     <>
       <Box display="flex">
         <BackBotton />
         <PageTitle title="GALLERY" />
-
-        {/* <BreedsSelect onChange={onChange} />
-    <LimitImagesSelect onChangeLimit={onChangeLimit} />
-    <AscSortButton sortBreeds={sortBreeds} />
-    <DescSortButton sortBreeds={sortBreeds} /> */}
       </Box>
       <Box
         display="flex"
@@ -69,25 +76,38 @@ export const GalleryBar = ({
           initialOptions={orderSelectOptions}
           onChange={onChange}
           name="ORDER"
+          placeholder={placeHolders.order}
+          value={values.order}
         />
         <GalleryTypeSelect
           title="TYPE"
           initialOptions={typeSelectOptions}
           onChange={onChange}
           name="TYPE"
+          placeholder={placeHolders.type}
+          value={values.type}
         />
         <GalleryBreedSelect
           title="BREED"
           initialOptions={breedSelectOptions}
           onChange={onChange}
           name="BREED"
+          placeholder={placeHolders.currentBreed}
+          value={values.currentBreed}
         />
-        <GalleryLimitSelect
-          title="LIMIT"
-          initialOptions={limitSelectOptions}
-          onChange={onChange}
-          name="LIMIT"
-        />
+        <Box display="flex" alignItems="end">
+          <GalleryLimitSelect
+            title="LIMIT"
+            initialOptions={limitSelectOptions}
+            onChange={onChange}
+            name="LIMIT"
+            placeholder={placeHolders.limit}
+            value={values.limit}
+          />
+          <ReloadImagesButton
+            onClick={onReloadButtonClic}
+          />
+        </Box>
       </Box>
     </>
   );

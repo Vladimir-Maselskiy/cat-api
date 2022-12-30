@@ -36,18 +36,13 @@ export const getBreeds = (params: {
           };
         };
       }) => {
-        return resp.data
-          .map((el: { breeds: string | any[] }) => {
+        return resp.data.map(
+          (el: { breeds: string | any[] }) => {
             if (el.breeds.length === 0)
               return { ...el, breeds: [{ name: '' }] };
             return el;
-          })
-          .sort(
-            (
-              a: { breeds: { name: number }[] },
-              b: { breeds: { name: number }[] }
-            ) => b.breeds[0].name > a.breeds[0].name
-          );
+          }
+        );
       }
     );
 };

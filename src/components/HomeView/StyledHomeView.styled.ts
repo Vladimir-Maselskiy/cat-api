@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import img from '../../img/girl-and-pet.png';
+// import img from '../../img/girl-and-pet.png';
+const img = require('../../img/girl-and-pet.png');
 
 export const StyledHomeView = styled.div`
   position: relative;

@@ -1,5 +1,9 @@
 import { StyledHome } from './Home.styled';
 
-export const Home = ({ children }) => {
+interface IProp {
+  children: JSX.Element;
+}
+
+export const Home = ({ children }: IProp) => {
   return <StyledHome>{children}</StyledHome>;
 };

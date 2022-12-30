@@ -1,11 +1,18 @@
+import {
+  initialCurrentBreed,
+  initialLimit,
+  initialOrder,
+  initialType,
+} from 'data/const';
 import { MyOptionType } from 'interfaces/interfaces';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActionMeta, SingleValue } from 'react-select';
 import catAPI from 'utils/catAPI';
 import {
   clearArray,
   getArrayOfBreedsWithCurrentType,
 } from 'utils/getArrayOfBreedsWithCurrentType';
+import { getPlaceholders } from 'utils/getPlaceholders';
 import { sortVisibleImageItems } from 'utils/sortVisibleImageItems';
 import { Box } from '../../components/Box/Box';
 import { Spinner } from '../../components/Spinner/Spinner';
@@ -13,17 +20,24 @@ import { GalleryBar } from './GalleryBar/GalleryBar';
 import { GalleryImagesGallery } from './GalleryImagesGallery/GalleryImagesGallery';
 
 export const Gallery = () => {
+  const placeholders = getPlaceholders();
+
   const [breeds, setBreeds] = useState<any[] | null>(null);
-  const [limit, setLimit] = useState<string | undefined>(
-    '5'
-  );
+
+  const [limit, setLimit] =
+    useState<MyOptionType>(initialLimit);
+
+  const [order, setOrder] =
+    useState<MyOptionType>(initialOrder);
+
+  const [type, setType] =
+    useState<MyOptionType>(initialType);
+  const [currentBreed, setCurrentBreed] =
+    useState<MyOptionType>(initialCurrentBreed);
+
   const [visibleBreeds, setVisibleBreeds] = useState<
     any[] | null
   >(null);
-
-  useEffect(() => {
-    console.log('visibleBreeds', visibleBreeds);
-  }, [visibleBreeds]);
 
   useEffect(() => {
     catAPI
@@ -33,7 +47,9 @@ export const Gallery = () => {
 
   useEffect(() => {
     if (breeds && limit)
-      setVisibleBreeds(breeds.slice(0, +limit));
+      setVisibleBreeds(
+        breeds.slice(0, parseInt(limit.value))
+      );
   }, [limit, breeds]);
 
   const onChange = (
@@ -42,6 +58,7 @@ export const Gallery = () => {
   ): void => {
     switch (actionMeta.name) {
       case 'ORDER':
+        if (newValue) setOrder(newValue);
         if (breeds)
           setBreeds(
             sortVisibleImageItems({
@@ -51,34 +68,41 @@ export const Gallery = () => {
           );
         break;
       case 'TYPE':
+        if (newValue) setType(newValue);
         if (newValue?.value && breeds) {
           clearArray();
           getArrayOfBreedsWithCurrentType({
             type: newValue.value,
             breeds,
-          }).then(setBreeds);
+            setBreeds,
+          });
         }
 
         break;
       case 'BREED':
+        if (newValue) setCurrentBreed(newValue);
         break;
       case 'LIMIT':
-        if (newValue?.value)
-          setLimit(parseInt(newValue.value).toString());
+        if (newValue) setLimit(newValue);
         break;
     }
-    console.log('newValue', newValue);
-    console.log('actionMeta', actionMeta);
+  };
+
+  const onReloadButtonClic = () => {
+    // setOrder(getPlaceholder('ORDER'));
+    // catAPI
+    //   .getBreeds({ limit: '20', hasBreeds: '0' })
+    //   .then(resp => {});
   };
 
   return (
     <>
       <Box width={640}>
         <GalleryBar
-          // setBreeds={setBreeds}
           onChange={onChange}
-
-          // sortBreeds={sortBreeds}
+          onReloadButtonClic={onReloadButtonClic}
+          placeHolders={placeholders}
+          values={{ limit, currentBreed, order, type }}
         />
       </Box>
       <Box
@@ -87,7 +111,7 @@ export const Gallery = () => {
         display="flex"
         flexGrow={2}
       >
-        {breeds ? (
+        {breeds && breeds.length > 0 ? (
           <GalleryImagesGallery breeds={visibleBreeds} />
         ) : (
           <Spinner />

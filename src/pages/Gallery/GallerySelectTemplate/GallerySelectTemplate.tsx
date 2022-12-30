@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import Select, {
   ActionMeta,
+  PropsValue,
   SingleValue,
   StylesConfig,
 } from 'react-select';
@@ -16,6 +17,8 @@ interface IProp {
   ) => void;
   initialOptions: string[];
   name: string;
+  placeholder: string;
+  value: PropsValue<MyOptionType>;
 }
 
 type IsMulti = false;
@@ -24,24 +27,12 @@ export const GallarySelectTemplate = ({
   onChange,
   initialOptions,
   name,
+  placeholder,
+  value,
 }: IProp) => {
   const [options, setOptions] = useState<MyOptionType[]>(
     []
   );
-  // const [breedsNames, setBreedsNames] = useState([]);
-
-  // useEffect(() => {
-  //   catAPI.getBreedsName().then(resp => {
-  //     setBreedsNames(resp);
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   setOptions([
-  //     { value: { id: 'allBreeds', name: 'All breeds' }, label: 'All breeds' },
-  //     ...breedsNames.map(breed => ({ value: breed, label: breed.name })),
-  //   ]);
-  // }, []);
 
   useEffect(() => {
     setOptions([
@@ -81,10 +72,7 @@ export const GallarySelectTemplate = ({
         backgroundColor: '#FFFFFF',
         boxShadow: 'none',
         border: 'none',
-
-        // border: state.isHovered ? '5px solid #FF868E' : '5px solid #FF868E',
         minHeight: 40,
-        // width: '100%',
         cursor: 'pointer',
       }),
 
@@ -103,7 +91,6 @@ export const GallarySelectTemplate = ({
         ...provided,
         borderRadius: 30,
         width: 300,
-        // left: 10,
         overflow: '-moz-scrollbars-none',
       }),
 
@@ -118,11 +105,12 @@ export const GallarySelectTemplate = ({
   return (
     <StyledSelectBox>
       <Select
-        placeholder={initialOptions[0]}
+        placeholder={placeholder}
         options={options}
         styles={customStyles}
         onChange={onChange}
         name={name}
+        value={value}
       ></Select>
     </StyledSelectBox>
   );

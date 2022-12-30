@@ -1,4 +1,8 @@
-import { ActionMeta, SingleValue } from 'react-select';
+import {
+  ActionMeta,
+  PropsValue,
+  SingleValue,
+} from 'react-select';
 
 export interface IBreed {
   id: string;
@@ -29,6 +33,8 @@ export interface IPropGallery {
     actionMeta: ActionMeta<MyOptionType>
   ) => void;
   name: string;
+  placeholder: string;
+  value: PropsValue<MyOptionType>;
 }
 
 export interface IPropsVoting {
