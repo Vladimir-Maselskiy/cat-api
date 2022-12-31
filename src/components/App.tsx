@@ -1,3 +1,4 @@
+import { TCat } from 'interfaces/interfaces';
 import { Breeds } from 'pages/Breeds/Breeds';
 import { Gallery } from 'pages/Gallery/Gallery';
 import { Voting } from 'pages/Voting/Voting';
@@ -10,30 +11,35 @@ import { Nav } from './Nav/Nav';
 import { NavLayout } from './NavLayout/NavLayout';
 
 export const App = () => {
-  const [likes, setLikes] = useState([]);
-  const [favourites, setFavourites] = useState([]);
-  const [dislikes, setDislikes] = useState([]);
+  const [likes, setLikes] = useState<TCat[]>([]);
+  const [favourites, setFavourites] = useState<TCat[]>([]);
+  const [dislikes, setDislikes] = useState<TCat[]>([]);
 
-  const setUsersCatsArrays = (type, currentCat) => {
+  const setUsersCatsArrays = (
+    type: 'likes' | 'favourites' | 'dislikes',
+    currentCat: TCat | null
+  ) => {
     switch (type) {
       case 'likes':
-        setLikes(p => [...p, currentCat]);
+        if (currentCat) setLikes(p => [...p, currentCat]);
         break;
       case 'favourites':
-        if (
-          favourites.findIndex(
-            cat => cat.id === currentCat.id
-          ) === -1
-        ) {
-          setFavourites(p => [...p, currentCat]);
-        } else {
-          setFavourites(p =>
-            p.filter(cat => cat.id !== currentCat.id)
-          );
-        }
+        if (currentCat)
+          if (
+            favourites.findIndex(
+              cat => cat.id === currentCat.id
+            ) === -1
+          ) {
+            setFavourites(p => [...p, currentCat]);
+          } else {
+            setFavourites(p =>
+              p.filter(cat => cat.id !== currentCat.id)
+            );
+          }
         break;
       case 'dislikes':
-        setDislikes(p => [...p, currentCat]);
+        if (currentCat)
+          setDislikes(p => [...p, currentCat]);
         break;
       default:
         break;

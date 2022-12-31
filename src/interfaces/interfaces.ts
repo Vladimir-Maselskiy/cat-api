@@ -4,6 +4,10 @@ import {
   SingleValue,
 } from 'react-select';
 
+export type TCat = {
+  id?: string;
+};
+
 export interface IBreed {
   id: string;
   name: string;

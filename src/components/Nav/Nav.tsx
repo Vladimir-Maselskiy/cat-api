@@ -7,9 +7,9 @@ import {
   StyledNavLink,
 } from './StyledNav.styled';
 
-import voting from '../../img/vote-table.png';
-import breeds from '../../img/pet-breeds.png';
-import gallery from '../../img/images-search.png';
+const voting = require('../../img/vote-table.png');
+const breeds = require('../../img/pet-breeds.png');
+const gallery = require('../../img/images-search.png');
 
 export const Nav = () => {
   return (
@@ -29,7 +29,10 @@ export const Nav = () => {
         </ListItem>
         <ListItem>
           <StyledNavLink to="./nav-bar/gallery">
-            <ItemIMG color="#FFD280" img={gallery}></ItemIMG>
+            <ItemIMG
+              color="#FFD280"
+              img={gallery}
+            ></ItemIMG>
             <ItemTitle>GALLERY</ItemTitle>
           </StyledNavLink>
         </ListItem>

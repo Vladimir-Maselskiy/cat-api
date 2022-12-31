@@ -1,7 +1,7 @@
 import { StyledHome } from './Home.styled';
 
 interface IProp {
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }
 
 export const Home = ({ children }: IProp) => {

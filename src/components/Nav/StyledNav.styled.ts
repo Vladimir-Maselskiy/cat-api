@@ -25,7 +25,7 @@ export const ListItem = styled.li`
   }
 `;
 
-export const ItemIMG = styled.div`
+export const ItemIMG = styled.div<{ img: string }>`
   height: 198px;
   width: 100%;
   background-color: ${p => p.color};

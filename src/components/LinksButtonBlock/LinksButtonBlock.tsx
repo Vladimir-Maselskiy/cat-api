@@ -1,9 +1,17 @@
 import { Box } from 'components/Box/Box';
-import { StyledkBotton, StyledNavLink } from './LinksButtonBlock.styled';
+import {
+  StyledkBotton,
+  StyledNavLink,
+} from './LinksButtonBlock.styled';
 
 export const LinksButtonBlock = () => {
   return (
-    <Box display="flex" minWidth={200} ml={10} justifyContent="space-between">
+    <Box
+      display="flex"
+      minWidth={200}
+      ml={10}
+      justifyContent="space-between"
+    >
       <StyledNavLink to="./cats-groups/likes">
         <StyledkBotton>
           <svg
