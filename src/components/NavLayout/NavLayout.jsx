@@ -5,7 +5,11 @@ import { Outlet } from 'react-router-dom';
 
 export const NavLayout = () => {
   return (
-    <Box p="30px 30px 30px 65px">
+    <Box
+      p="30px 30px 30px 65px"
+      display="flex"
+      flexDirection="column"
+    >
       <Box borderRadius={20} display="flex">
         <FindBreedsForm />
         <LinksButtonBlock />
@@ -15,9 +19,11 @@ export const NavLayout = () => {
         mt={20}
         borderRadius={20}
         p={20}
-        minHeight={782}
+        flexGrow={2}
+        maxHeight={990}
         display="flex"
         flexDirection="column"
+        // overflow="hidden"
       >
         <Outlet />
       </Box>

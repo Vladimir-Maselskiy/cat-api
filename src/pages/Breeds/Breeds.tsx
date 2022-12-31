@@ -60,6 +60,7 @@ export const Breeds = () => {
         mt={20}
         display="flex"
         flexGrow={2}
+        maxHeight={880}
       >
         {breeds ? (
           <BreedsGallery breeds={visibleBreeds} />

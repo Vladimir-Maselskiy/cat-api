@@ -5,7 +5,7 @@ export const StyledBreedsGallery = styled.ul<{
 }>`
   display: grid;
   width: 640px;
-  height: 716px;
+  /* height: 716px; */
   grid-template-areas:
     'img0 img1 img2'
     'img0 img3 img3'

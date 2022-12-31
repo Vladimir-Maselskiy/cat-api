@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const StyledNav = styled.div`
   width: 665px;
-  height: 900px;
+  height: 1100px;
   padding-left: 147px;
 `;
 

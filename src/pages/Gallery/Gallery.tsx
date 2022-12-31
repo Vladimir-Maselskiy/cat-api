@@ -89,10 +89,14 @@ export const Gallery = () => {
   };
 
   const onReloadButtonClic = () => {
-    // setOrder(getPlaceholder('ORDER'));
-    // catAPI
-    //   .getBreeds({ limit: '20', hasBreeds: '0' })
-    //   .then(resp => {});
+    setBreeds([]);
+    setCurrentBreed(initialCurrentBreed);
+    setType(initialType);
+    setOrder(initialOrder);
+    setLimit(initialLimit);
+    catAPI
+      .getBreeds({ limit: '20', hasBreeds: '0' })
+      .then(setBreeds);
   };
 
   return (
@@ -110,6 +114,7 @@ export const Gallery = () => {
         mt={20}
         display="flex"
         flexGrow={2}
+        maxHeight={700}
       >
         {breeds && breeds.length > 0 ? (
           <GalleryImagesGallery breeds={visibleBreeds} />
