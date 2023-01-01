@@ -1,11 +1,11 @@
 import { Box } from '../../../components/Box/Box';
-import { StyledIMG } from './VotingView.styled';
+import { StyledIMG } from './SelectedView.styled';
 
 interface IProps {
   currentImg: { url?: string; id?: string } | null;
 }
 
-export const VotingView = ({ currentImg }: IProps) => {
+export const SelectedView = ({ currentImg }: IProps) => {
   return (
     <Box
       display="block"

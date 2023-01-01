@@ -1,6 +1,7 @@
 import { TCat } from 'interfaces/interfaces';
 import { Breeds } from 'pages/Breeds/Breeds';
 import { Gallery } from 'pages/Gallery/Gallery';
+import { Selected } from 'pages/Selected/Selected';
 import { Voting } from 'pages/Voting/Voting';
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -59,7 +60,12 @@ export const App = () => {
               />
             }
           ></Route>
-          <Route path="breeds" element={<Breeds />}></Route>
+          <Route path="breeds" element={<Breeds />}>
+            <Route
+              path=":id"
+              element={<Selected />}
+            ></Route>
+          </Route>
           <Route
             path="gallery"
             element={<Gallery />}
