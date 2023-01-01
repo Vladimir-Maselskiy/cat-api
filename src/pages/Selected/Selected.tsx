@@ -5,8 +5,10 @@ import catAPI from '../../utils/catAPI';
 import { SelectedBar } from './SelectedBar/SelectedBar';
 import { SelectedView } from './SelectedView/SelectedView';
 import { Spinner } from '../../components/Spinner/Spinner';
+import { useParams } from 'react-router-dom';
 
 export const Selected = () => {
+  const { id } = useParams<string>();
   const [currentImg, setCurrentImg] = useState<{
     id?: string;
     favorit: boolean;
@@ -14,11 +16,13 @@ export const Selected = () => {
   } | null>(null);
 
   useEffect(() => {
-    catAPI.getBreeds({}).then(resp => {
-      const currentImg = resp[0];
-      setCurrentImg(currentImg);
-    });
-  }, []);
+    if (id)
+      catAPI.getOneImageByID(id).then(resp => {
+        console.log('resp', resp);
+        const currentImg = resp;
+        setCurrentImg(currentImg);
+      });
+  }, [id]);
 
   // const handleVotingButtonsClick = (
   //   type: 'likes' | 'favourites' | 'dislikes',
@@ -43,7 +47,7 @@ export const Selected = () => {
 
   return (
     <>
-      <SelectedBar />
+      {id && <SelectedBar id={id} />}
       <Box position="relative" flexGrow={1}>
         {currentImg ? (
           <Box position="relative">

@@ -60,12 +60,11 @@ export const App = () => {
               />
             }
           ></Route>
-          <Route path="breeds" element={<Breeds />}>
-            <Route
-              path=":id"
-              element={<Selected />}
-            ></Route>
-          </Route>
+          <Route path="breeds" element={<Breeds />}></Route>
+          <Route
+            path="breeds/:id"
+            element={<Selected />}
+          ></Route>
           <Route
             path="gallery"
             element={<Gallery />}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   StyledBreedsGallery,
   StyledHoverIMGBox,
@@ -12,6 +13,7 @@ interface IProps {
 }
 
 export const BreedsGallery = ({ breeds }: IProps) => {
+  const navigate = useNavigate();
   return (
     breeds && (
       <StyledBreedsGallery perPage={breeds.length}>
@@ -24,6 +26,7 @@ export const BreedsGallery = ({ breeds }: IProps) => {
                   ? (index % 20).toString()
                   : index.toString()
               }
+              onClick={() => navigate(`${el.id}`)}
             >
               <StyledHoverIMGBox>
                 <StyledHoverName>

@@ -69,9 +69,18 @@ export const getBreedsByBreedID = (
   // return resp.data.map(breed => breed.name);
 };
 
+export const getOneImageByID = (
+  id: string
+): Promise<any> => {
+  return axios
+    .get(`https://api.thecatapi.com/v1/images/${id}`)
+    .then((resp: { data: any }) => resp.data);
+};
+
 const catAPI = {
   getBreeds,
   getBreedsName,
   getBreedsByBreedID,
+  getOneImageByID,
 };
 export default catAPI;
