@@ -1,9 +1,15 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { StyledBackBotton } from './BackBotton.styled';
 
 export const BackBotton = () => {
+  const navigate = useNavigate();
+
   return (
-    <StyledBackBotton>
+    <StyledBackBotton
+      onClick={() => {
+        navigate(-1);
+      }}
+    >
       <svg
         width="12"
         height="20"

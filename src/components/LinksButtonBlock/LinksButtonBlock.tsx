@@ -1,10 +1,12 @@
 import { Box } from 'components/Box/Box';
+import { useLocation } from 'react-router-dom';
 import {
   StyledkBotton,
   StyledNavLink,
 } from './LinksButtonBlock.styled';
 
 export const LinksButtonBlock = () => {
+  const location = useLocation();
   return (
     <Box
       display="flex"
@@ -12,7 +14,10 @@ export const LinksButtonBlock = () => {
       ml={10}
       justifyContent="space-between"
     >
-      <StyledNavLink to="./cats-groups/likes">
+      <StyledNavLink
+        to="./cats-groups/likes"
+        state={{ from: location }}
+      >
         <StyledkBotton>
           <svg
             width="30"
@@ -30,7 +35,10 @@ export const LinksButtonBlock = () => {
           </svg>
         </StyledkBotton>
       </StyledNavLink>
-      <StyledNavLink to="./cats-groups/favourites">
+      <StyledNavLink
+        to="./cats-groups/favourites"
+        state={{ from: location }}
+      >
         <StyledkBotton>
           <svg
             width="30"
@@ -48,7 +56,10 @@ export const LinksButtonBlock = () => {
           </svg>
         </StyledkBotton>
       </StyledNavLink>
-      <StyledNavLink to="./cats-groups/dislikes">
+      <StyledNavLink
+        to="./cats-groups/dislikes"
+        state={{ from: location }}
+      >
         <StyledkBotton>
           <svg
             width="30"
