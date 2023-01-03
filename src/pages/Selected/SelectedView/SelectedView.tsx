@@ -7,12 +7,7 @@ interface IProps {
 
 export const SelectedView = ({ currentImg }: IProps) => {
   return (
-    <Box
-      display="block"
-      height={360}
-      mt={20}
-      position="relative"
-    >
+    <Box display="block" height={360} position="relative">
       {currentImg && (
         <StyledIMG
           src={currentImg.url}

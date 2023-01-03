@@ -6,23 +6,45 @@ import { SelectedBar } from './SelectedBar/SelectedBar';
 import { SelectedView } from './SelectedView/SelectedView';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { useParams } from 'react-router-dom';
+import { SelectedInfoBox } from './SelectedInfoBox/SelectedInfoBox';
+import { IBreedByBreedsID } from 'interfaces/interfaces';
 
 export const Selected = () => {
+  const [breedID, setBreedID] = useState(null);
+  const [breed, setBreed] = useState<any[] | null>(null);
+  const [visibleBreeds, setVisibleBreeds] = useState<
+    IBreedByBreedsID[] | null
+  >(null);
+
   const { id } = useParams<string>();
-  const [currentImg, setCurrentImg] = useState<{
-    id?: string;
-    favorit: boolean;
-    url?: string;
-  } | null>(null);
+  const [currentBreed, setCurrentBreed] =
+    useState<IBreedByBreedsID | null>(null);
 
   useEffect(() => {
     if (id)
       catAPI.getOneImageByID(id).then(resp => {
-        console.log('resp', resp);
-        const currentImg = resp;
-        setCurrentImg(currentImg);
+        const currentBreed = resp;
+        const breedID = resp.breeds[0].id;
+        setCurrentBreed(currentBreed);
+        setBreedID(breedID);
+        console.log('currentBreed', currentBreed);
       });
   }, [id]);
+
+  useEffect(() => {
+    if (breedID) {
+      catAPI.getBreedsByBreedID(breedID).then(setBreed);
+    }
+  }, [breed]);
+
+  useEffect(() => {
+    if (visibleBreeds && currentBreed) {
+      const filteredBreeds = visibleBreeds.filter(
+        breed => currentBreed.id !== breed.id
+      );
+      setVisibleBreeds([currentBreed, ...filteredBreeds]);
+    }
+  }, [currentBreed, visibleBreeds]);
 
   // const handleVotingButtonsClick = (
   //   type: 'likes' | 'favourites' | 'dislikes',
@@ -48,18 +70,24 @@ export const Selected = () => {
   return (
     <>
       {id && <SelectedBar id={id} />}
-      <Box position="relative" flexGrow={1}>
-        {currentImg ? (
+      <Box
+        position="relative"
+        maxHeight={360}
+        mt={20}
+        flexGrow={1}
+      >
+        {currentBreed ? (
           <Box position="relative">
-            <SelectedView currentImg={currentImg} />
+            <SelectedView currentImg={currentBreed} />
           </Box>
         ) : (
           <Spinner />
         )}
       </Box>
-      {/* {logs.length > 0 && ( */}
-      {/* // <Box mt={52} flexGrow={2} minHeight={280}></Box> */}
-      {/* )} */}
+
+      <Box mt={52} flexGrow={2} minHeight={280}>
+        <SelectedInfoBox breed={currentBreed} />
+      </Box>
     </>
   );
 };

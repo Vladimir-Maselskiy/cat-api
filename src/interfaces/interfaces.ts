@@ -8,9 +8,26 @@ export type TCat = {
   id?: string;
 };
 
+export interface IBreedByBreedsID {
+  id: string;
+  name: string;
+  url: string;
+  breeds: {
+    id: string;
+    name: string;
+    life_span: string;
+    description: string;
+    temperament: string;
+    weight: { imperial: string };
+    origin: string;
+  }[];
+}
+
 export interface IBreed {
   id: string;
   name: string;
+  favorit: boolean;
+  url: string;
 }
 
 export interface IPropSortBreeds {
