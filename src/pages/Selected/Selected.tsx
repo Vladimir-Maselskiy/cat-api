@@ -35,7 +35,7 @@ export const Selected = () => {
     if (breedID) {
       catAPI.getBreedsByBreedID(breedID).then(setBreed);
     }
-  }, [breed]);
+  }, [breed, breedID]);
 
   useEffect(() => {
     if (visibleBreeds && currentBreed) {
