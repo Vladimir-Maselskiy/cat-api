@@ -17,7 +17,7 @@ export const DotsBox = styled.div`
   display: flex;
   background: #ffffff;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 20px;
 `;
 
 export const StyledDot = styled.div<{ isActiv: boolean }>`

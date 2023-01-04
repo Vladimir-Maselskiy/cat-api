@@ -1,4 +1,3 @@
-import { Spinner } from 'components/Spinner/Spinner';
 import { useEffect, useState } from 'react';
 
 import { Box } from '../../../components/Box/Box';
@@ -22,7 +21,7 @@ export const ImageSlider = ({
 
   useEffect(() => {
     setIdOfVisibleBreed(indexOfVisibleImage);
-  }, [indexOfVisibleImage]);
+  }, [indexOfVisibleImage, setIdOfVisibleBreed]);
 
   return (
     <Box height={360} position="relative">
