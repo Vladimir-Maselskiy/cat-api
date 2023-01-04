@@ -3,8 +3,16 @@ import { StyledPageTitle } from './PageTitle.stlyled';
 
 type TProp = {
   title: string;
+  isActiveColor: boolean;
 };
 
-export const PageTitle = ({ title }: TProp) => {
-  return <StyledPageTitle>{title}</StyledPageTitle>;
+export const PageTitle = ({
+  title,
+  isActiveColor,
+}: TProp) => {
+  return (
+    <StyledPageTitle isActive={isActiveColor}>
+      {title}
+    </StyledPageTitle>
+  );
 };

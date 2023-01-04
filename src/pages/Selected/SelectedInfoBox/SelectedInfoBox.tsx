@@ -1,6 +1,7 @@
 import { Box } from 'components/Box/Box';
 import { IBreedByBreedsID } from 'interfaces/interfaces';
 import {
+  StyledBreedName,
   StyledDecs,
   StyledInfo,
   StyledTitle,
@@ -11,12 +12,11 @@ interface IProps {
 }
 
 export const SelectedInfoBox = ({ breed }: IProps) => {
-  console.log('SelectedInfoBox breed', breed);
   return (
     <>
       {breed && (
         <Box
-          p="26px 40px 40px 40px"
+          p="26px 60px 40px 60px"
           position="relative"
           display="flex"
           alignItems="center"
@@ -24,9 +24,17 @@ export const SelectedInfoBox = ({ breed }: IProps) => {
           border="2px solid #FBE0DC"
           borderRadius={20}
         >
+          <StyledBreedName>
+            {breed?.breeds[0].name}
+          </StyledBreedName>
           <StyledDecs>Family companion cat</StyledDecs>
-          <Box display="flex" mt={20}>
-            <Box width={1 / 2}>
+          <Box
+            display="flex"
+            mt={20}
+            width="100%"
+            justifyContent="space-between"
+          >
+            <Box width={0.45}>
               <StyledTitle>
                 Temperament:
                 <StyledInfo>

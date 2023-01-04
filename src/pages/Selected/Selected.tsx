@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import catAPI from '../../utils/catAPI';
 import { SelectedBar } from './SelectedBar/SelectedBar';
-import { SelectedView } from './SelectedView/SelectedView';
+import { ImageSlider } from './ImageSlider/ImageSlider';
 import { Spinner } from '../../components/Spinner/Spinner';
 import { useParams } from 'react-router-dom';
 import { SelectedInfoBox } from './SelectedInfoBox/SelectedInfoBox';
@@ -15,19 +15,21 @@ export const Selected = () => {
   const [visibleBreeds, setVisibleBreeds] = useState<
     IBreedByBreedsID[] | null
   >(null);
-
-  const { id } = useParams<string>();
   const [currentBreed, setCurrentBreed] =
     useState<IBreedByBreedsID | null>(null);
+
+  const [idOnButton, setIdOnButton] = useState('');
+
+  const { id } = useParams<string>();
 
   useEffect(() => {
     if (id)
       catAPI.getOneImageByID(id).then(resp => {
+        console.log('resp in Selected', resp);
         const currentBreed = resp;
         const breedID = resp.breeds[0].id;
         setCurrentBreed(currentBreed);
         setBreedID(breedID);
-        console.log('currentBreed', currentBreed);
       });
   }, [id]);
 
@@ -35,16 +37,30 @@ export const Selected = () => {
     if (breedID) {
       catAPI.getBreedsByBreedID(breedID).then(setBreed);
     }
-  }, [breed, breedID]);
+  }, [breedID]);
 
   useEffect(() => {
-    if (visibleBreeds && currentBreed) {
-      const filteredBreeds = visibleBreeds.filter(
+    if (breed && currentBreed) {
+      let filteredBreeds = breed.filter(
         breed => currentBreed.id !== breed.id
       );
+      if (filteredBreeds.length > 4) {
+        filteredBreeds = filteredBreeds.slice(0, 4);
+      }
       setVisibleBreeds([currentBreed, ...filteredBreeds]);
     }
-  }, [currentBreed, visibleBreeds]);
+  }, [currentBreed, breed]);
+
+  const setIdOfVisibleBreed = (index: number) => {
+    if (visibleBreeds) {
+      const currentBreed = visibleBreeds[index];
+      setIdOnButton(currentBreed.id);
+      return;
+    }
+    if (currentBreed) {
+      setIdOnButton(currentBreed.id);
+    }
+  };
 
   // const handleVotingButtonsClick = (
   //   type: 'likes' | 'favourites' | 'dislikes',
@@ -69,7 +85,7 @@ export const Selected = () => {
 
   return (
     <>
-      {id && <SelectedBar id={id} />}
+      {id && <SelectedBar id={idOnButton} />}
       <Box
         position="relative"
         maxHeight={360}
@@ -78,7 +94,10 @@ export const Selected = () => {
       >
         {currentBreed ? (
           <Box position="relative">
-            <SelectedView currentImg={currentBreed} />
+            <ImageSlider
+              visibleBreeds={visibleBreeds}
+              setIdOfVisibleBreed={setIdOfVisibleBreed}
+            />
           </Box>
         ) : (
           <Spinner />

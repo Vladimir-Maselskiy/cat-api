@@ -29,7 +29,10 @@ export const CatsGroupsLayout = ({ groups }: IProps) => {
       <Box display="flex">
         <BackBotton />
         {groupName && (
-          <PageTitle title={groupName.toUpperCase()} />
+          <PageTitle
+            title={groupName.toUpperCase()}
+            isActiveColor={true}
+          />
         )}
       </Box>
       <Box mt={20}>

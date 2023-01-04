@@ -21,7 +21,6 @@ interface IProp {
     newValue: SingleValue<MyOptionType>,
     actionMeta: ActionMeta<MyOptionType>
   ) => void;
-  
 }
 
 interface IOption {
@@ -37,7 +36,6 @@ export const BreedsSelect = ({ onChange }: IProp) => {
 
   useEffect(() => {
     catAPI.getBreedsName().then(resp => {
-      console.log('resp', resp);
       setBreedsNames(resp);
     });
   }, []);

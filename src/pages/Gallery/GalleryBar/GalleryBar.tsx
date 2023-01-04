@@ -60,7 +60,7 @@ export const GalleryBar = ({
     <>
       <Box display="flex">
         <BackBotton />
-        <PageTitle title="GALLERY" />
+        <PageTitle title="GALLERY" isActiveColor={true} />
       </Box>
       <Box
         display="flex"

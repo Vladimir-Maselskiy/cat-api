@@ -10,8 +10,8 @@ export const SelectedBar = ({ id }: IProps) => {
   return (
     <Box display="flex">
       <BackBotton />
-      <PageTitle title="BREEDS" />
-      <PageTitle title={id} />
+      <PageTitle title="BREEDS" isActiveColor={false} />
+      <PageTitle title={id} isActiveColor={true} />
     </Box>
   );
 };

@@ -42,7 +42,7 @@ export const BreedsBar = ({
   return (
     <Box display="flex">
       <BackBotton />
-      <PageTitle title="BREEDS" />
+      <PageTitle title="BREEDS" isActiveColor={true} />
       <BreedsSelect onChange={onChange} />
       <LimitImagesSelect onChangeLimit={onChangeLimit} />
       <AscSortButton sortBreeds={sortBreeds} />
